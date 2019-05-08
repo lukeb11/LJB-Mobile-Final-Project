@@ -90,31 +90,31 @@ public class MainActivity extends AppCompatActivity {
     private void addItems(){
         mItemNames.add("Ice Cream");
         mItemDesc.add("Ice cream sandwiches have chocolate wafers and vanilla filling.");
-        mImages.add(R.drawable.ic_launcher_background);
+        mImages.add(R.drawable.icecream_circle);
         mPrices.add(0.99);
         mQuantity.add("");
 
         mItemNames.add("FroYos");
         mItemDesc.add("FroYo is premium self-serve frozen yogurt.");
-        mImages.add(R.drawable.ic_launcher_background);
+        mImages.add(R.drawable.froyo_circle);
         mPrices.add(1.75);
         mQuantity.add("");
 
         mItemNames.add("Oreos");
         mItemDesc.add("Oreos are chocolate cookies with vanilla icing.");
-        mImages.add(R.drawable.ic_launcher_background);
+        mImages.add(R.drawable.android_oreo);
         mPrices.add(0.25);
         mQuantity.add("");
 
         mItemNames.add("Donuts");
         mItemDesc.add("Donuts are glazed and sprinkled with candy.");
-        mImages.add(R.drawable.ic_launcher_background);
+        mImages.add(R.drawable.donut_circle);
         mPrices.add(0.99);
         mQuantity.add("");
 
         mItemNames.add("KitKats");
         mItemDesc.add("KitKats are wafer sticks coated with chocolate.");
-        mImages.add(R.drawable.ic_launcher_background);
+        mImages.add(R.drawable.android_kitkat);
         mPrices.add(0.75);
         mQuantity.add("");
 
@@ -137,13 +137,18 @@ public class MainActivity extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_LOCATION: {
                     if (view == v)
                         return true;
-                    Log.d(TAG, "thing");
+                    //Log.d(TAG, "thing");
                     //int index = calcIndex(event.getX(), event.getY());
                     //ItemHolder.removeView(view);
                     //gridLayout.addView(view, index);
                     break;
                 }
-
+                case DragEvent.ACTION_DRAG_ENTERED: {
+                    Log.d(TAG, "Entered");
+                }
+                case DragEvent.ACTION_DRAG_EXITED:{
+                    Log.d(TAG, "Exited");
+                }
                 case DragEvent.ACTION_DROP: {
                     Log.d(TAG, "onDrag: Dropping");
                     //match();

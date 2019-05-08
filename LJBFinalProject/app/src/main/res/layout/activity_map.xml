@@ -57,29 +57,6 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/ic_gps"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_below="@id/relLayout1"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:src="@drawable/ic_gps"
-        />
-
-    <ImageView
-        android:id="@+id/ic_unit"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_below="@id/ic_gps"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:src="@drawable/ic_unit" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

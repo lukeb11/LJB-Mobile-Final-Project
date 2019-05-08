@@ -66,10 +66,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private EditText mSearchText;
-    private ImageView mGPS;
+
     private ImageView mSearchButton;
-    private ImageView mAreaButton;
-    private ImageView mUnitButton;
 
 
     //Variables
@@ -86,13 +84,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
         mSearchText = findViewById(R.id.input_search);
         mSearchButton = findViewById(R.id.ic_magnify);
-        mGPS = findViewById(R.id.ic_gps);
-        mAreaButton = findViewById(R.id.area_button);
-        mUnitButton = findViewById(R.id.ic_unit);
         points = new ArrayList<>();
         markers = new ArrayList<>();
         builder = new AlertDialog.Builder(this);
-        unit = "meter";
 
         getLocationPermission();
 
@@ -128,26 +122,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
             }
         });
-        mGPS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getDeviceLocation();
-            }
-        });
-
-        mAreaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                makePolygon();
-            }
-        });
-
-        mUnitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeUnit();
-            }
-        });
     }
 
     private void geoLocate() {
@@ -170,28 +144,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         }
     }
 
-    private void makePolygon() {
-        if (points.size() >= 3) {
-            PolygonOptions polygonOptions = new PolygonOptions();
-            for (int i = 0; i < points.size(); i++) {
-
-                if (i != points.size()) {
-                    Log.d(TAG, "makePolygon: Point " + i + " Lat=" + points.get(i).latitude
-                            + " Lng=" + points.get(i).longitude);
-                    polygonOptions.add(points.get(i));
-                } else {
-                    Log.d(TAG, "makePolygon: Point " + i + " Lat=" + points.get(0).latitude
-                            + " Lng=" + points.get(0).longitude);
-                    polygonOptions.add(points.get(0));
-                }
-            }
-            polygonOptions.strokeColor(Color.RED);
-            polygonOptions.fillColor(Color.GREEN);
-            Polygon polygon = mMap.addPolygon(polygonOptions);
-            displayArea();
-        } else
-            return;
-    }
 
     private void displayArea() {
         DecimalFormat outputFormat = new DecimalFormat("#0.000");
@@ -213,34 +165,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         } else
             Toast.makeText(this, "INPUT ERROR",
                     Toast.LENGTH_LONG).show();
-    }
-
-    private void changeUnit() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select Unit");
-        builder.setItems(new CharSequence[]{"Meters", "Kilometers", "Miles"}, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0:
-                        unit = "meter";
-                        Toast.makeText(getApplicationContext(),
-                                "Measuring in Meters", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 1:
-                        unit = "kilo";
-                        Toast.makeText(getApplicationContext(),
-                                "Measuring in Kilometers", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 2:
-                        unit = "mile";
-                        Toast.makeText(getApplicationContext(),
-                                "Measuring in Miles", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        });
-        builder.create().show();
     }
 
     private void hideSoftKeyboard() {
